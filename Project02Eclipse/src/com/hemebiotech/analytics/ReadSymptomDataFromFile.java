@@ -24,6 +24,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	private String filepath;
 	
+	
 	/**
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
@@ -41,7 +42,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		if (filepath != null)
 		{
 			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+				BufferedReader reader = new BufferedReader (new FileReader(filepath)); 
 				String line = reader.readLine();
 				
 				while (line != null)
@@ -63,7 +64,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * method that reads data from a file
 	 *@return dataInput.GetSymptoms() : list of symptoms
 	 */
-	public List <String> Reading (ReadSymptomDataFromFile dataInput)
+	public List<String> Reading (ReadSymptomDataFromFile dataInput)
 	{
 		return dataInput.GetSymptoms();	
 	}
@@ -95,6 +96,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	/**
 	 * method that generates a new result.out file listing the symptoms with their occurrences 
+	 * @return 
 	 * @throws IOException 
 	 *
 	 */
@@ -112,10 +114,13 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		
 		for(Entry<String, Integer> orh : symptomOccurrence.entrySet()) // the loop allows you to enter the symptom with its number of occurrences
 		{
-			writer.write(orh.getKey() + "=" + orh.getValue());
+			writer.write(orh.getKey() + " = " + orh.getValue() + "\n");
+
 		}
 		
 		writer.close();
 	}
+
+
 	
 }
