@@ -4,16 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
 
 
 /**
@@ -35,7 +26,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 	
 	@Override
-	public List<String> GetSymptoms() 
+	public List<String> getSymptoms() 
 	{
 		ArrayList<String> result = new ArrayList<String>();
 		
@@ -60,66 +51,6 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		return result;
 	}
 	
-	/**
-	 * method that reads data from a file
-	 *@return dataInput.GetSymptoms() : list of symptoms
-	 */
-	public List<String> Reading (ReadSymptomDataFromFile dataInput)
-	{
-		return dataInput.GetSymptoms();	
-	}
-	
-	
-	/**
-	 * Method Sorting: put the list in alphabetical order count the occurrences of
-	 * each symptom in the list.
-	 * 
-	 * @param list table type of list of symptoms not ordered with duplicates
-	 * @return mapSorted: TreeMap including symptoms in alphabetical order and count
-	 *         occurrences.
-	 */
-	public TreeMap<String, Integer> Sorting(List<String> list) {
-		Set<String> noDuplicateSet = new HashSet<String>(list); // Delete duplicates
-		List<String> noDuplicateList = new ArrayList<String>(noDuplicateSet); // new list without duplicates
-
-		Map<String, Integer> symptomWithOccurrence = new HashMap<String, Integer>(); // Temporary Map to get (symptoms,
-																					// occurrence)
-
-		for (String symptom : noDuplicateList) { // fill the Map with symptoms(key) and occurrences(value)
-			symptomWithOccurrence.put(symptom, Collections.frequency(list, symptom));
-		}
-
-		TreeMap<String, Integer> mapSorted = new TreeMap<String, Integer>(); // TreeMap to sort alphabetically
-		mapSorted.putAll(symptomWithOccurrence); // fill the TreeMap with our temporary Map
-		return mapSorted;
-	}
-	
-	/**
-	 * method that generates a new result.out file listing the symptoms with their occurrences 
-	 * @return 
-	 * @throws IOException 
-	 *
-	 */
-	public void Saving (TreeMap<String, Integer> symptomOccurrence) throws IOException
-	{
-		FileWriter writer = null;
-		try
-		{	
-			writer = new FileWriter ("result.out"); // method to write to file result.out
-		} 
-		catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		
-		for(Entry<String, Integer> orh : symptomOccurrence.entrySet()) // the loop allows you to enter the symptom with its number of occurrences
-		{
-			writer.write(orh.getKey() + " = " + orh.getValue() + "\n");
-
-		}
-		
-		writer.close();
-	}
 
 
 	
